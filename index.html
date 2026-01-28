@@ -8,14 +8,13 @@
 
   <style>
     :root{
-      --bg:#0b1220;
       --overlay: rgba(17, 24, 39, .62);
       --white:#ffffff;
       --soft:#f7f7f7;
       --text:#111827;
       --muted:#6b7280;
-      --blue:#1d4ed8;
-      --blue2:#2563eb;
+      --blue:#2563eb;
+      --blue2:#1d4ed8;
       --border:#e5e7eb;
       --shadow: 0 18px 50px rgba(0,0,0,.12);
       --max: 1100px;
@@ -36,13 +35,16 @@
     .hero{
       position:relative;
       min-height:100vh;
-      background: url("./encg-settat-campus.jpg") center/cover no-repeat;
+      background: url("./encg-settat-campus.jpg") center/cover no-repeat fixed;
+      will-change: background-position;
     }
     .hero::before{
       content:"";
       position:absolute;
       inset:0;
-      background: var(--overlay);
+      background:
+        radial-gradient(1200px 700px at 50% 10%, rgba(59,130,246,.18), transparent 60%),
+        linear-gradient(180deg, var(--overlay), var(--overlay));
     }
 
     /* Top nav */
@@ -54,7 +56,8 @@
       display:flex;
       align-items:center;
       background: rgba(0,0,0,.12);
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,.10);
     }
     .nav-inner{
       width:min(var(--max), 92%);
@@ -66,28 +69,32 @@
       color: rgba(255,255,255,.92);
     }
     .nav-left{
-      font-weight:800;
+      font-weight:900;
       letter-spacing:.04em;
       text-transform:uppercase;
       font-size:14px;
+      white-space:nowrap;
     }
+
     .nav-links{
       display:flex;
       gap:18px;
       align-items:center;
       flex-wrap:wrap;
       justify-content:flex-end;
+      position:relative;
     }
     .nav-links a{
       color: rgba(255,255,255,.88);
       text-decoration:none;
       text-transform:uppercase;
       letter-spacing:.06em;
-      font-weight:800;
+      font-weight:900;
       font-size:12px;
       padding:8px 6px;
       border-bottom: 2px solid transparent;
       transition: .15s ease;
+      white-space:nowrap;
     }
     .nav-links a:hover{
       color:#fff;
@@ -96,6 +103,19 @@
     .nav-links a.active{
       color:#fff;
       border-bottom-color: rgba(59,130,246,.95);
+    }
+
+    .nav-indicator{
+      position:absolute;
+      height:2px;
+      bottom:6px;
+      left:0;
+      width:0;
+      background: rgba(59,130,246,.95);
+      border-radius:999px;
+      transform: translateX(0);
+      transition: width .25s ease, transform .25s ease;
+      pointer-events:none;
     }
 
     .linkedin{
@@ -109,6 +129,40 @@
       font-weight:1000;
       text-decoration:none;
       margin-left:4px;
+      border:1px solid rgba(255,255,255,.10);
+    }
+
+    .burger{
+      display:none;
+      background: rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.92);
+      border-radius: 12px;
+      padding:10px 12px;
+      cursor:pointer;
+      font-weight:1000;
+    }
+    .mobilePanel{
+      display:none;
+      position:fixed;
+      top: var(--navH);
+      left:0; right:0;
+      z-index:60;
+      background: rgba(2,6,23,.86);
+      backdrop-filter: blur(12px);
+      border-bottom:1px solid rgba(255,255,255,.10);
+      padding: 12px 16px 16px;
+    }
+    .mobilePanel a{
+      display:block;
+      padding: 12px 12px;
+      border-radius: 14px;
+      margin: 6px 0;
+      color: rgba(241,245,249,.95);
+      text-decoration:none;
+      font-weight:1000;
+      border:1px solid rgba(148,163,184,.20);
+      background: rgba(15,23,42,.25);
     }
 
     /* Hero content */
@@ -144,7 +198,14 @@
       display:flex;
       align-items:center;
       justify-content:center;
+      animation: floaty 5.2s ease-in-out infinite;
+      will-change: transform;
     }
+    @keyframes floaty{
+      0%,100%{ transform: translateY(0); }
+      50%{ transform: translateY(-10px); }
+    }
+
     .avatarWrap img{
       width:100%;
       height:100%;
@@ -183,12 +244,14 @@
       justify-content:center;
       padding:12px 18px;
       border-radius:6px;
-      background: var(--blue2);
+      background: var(--blue);
       color:white;
       text-decoration:none;
       font-weight:900;
       box-shadow: 0 10px 24px rgba(37,99,235,.35);
       transition: transform .06s ease, filter .12s ease;
+      position:relative;
+      overflow:hidden;
     }
     .cta:hover{filter:brightness(1.05)}
     .cta:active{transform:translateY(1px)}
@@ -205,6 +268,10 @@
       border-radius:10px;
       box-shadow: var(--shadow);
       padding:34px;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .card:hover{
+      transform: translateY(-2px);
     }
 
     .twoCol{
@@ -241,7 +308,7 @@
       font-size:12px;
     }
     .value{
-      font-weight:700;
+      font-weight:800;
       color:#111827;
       overflow:hidden;
       text-overflow:ellipsis;
@@ -250,7 +317,6 @@
     .value a{color:#111827; text-decoration:none}
     .value a:hover{text-decoration:underline}
 
-    /* Simple section titles like the site */
     .sectionTitleBar{
       width:min(var(--max), 92%);
       margin: 0 auto;
@@ -274,7 +340,10 @@
       border-radius:10px;
       box-shadow: var(--shadow);
       padding:18px;
+      transition: transform .18s ease, box-shadow .18s ease;
     }
+    .mini:hover{ transform: translateY(-2px); }
+
     .mini h3{
       margin:0 0 10px 0;
       font-size:16px;
@@ -290,7 +359,7 @@
       border-radius:999px;
       border:1px solid #e5e7eb;
       background:#f8fafc;
-      font-weight:800;
+      font-weight:900;
       font-size:13px;
       color:#0f172a;
     }
@@ -306,7 +375,96 @@
       padding:24px 0;
       text-align:center;
       color:#6b7280;
-      font-weight:700;
+      font-weight:800;
+    }
+
+    /* =========================
+       TRENDING ANIMATIONS
+       ========================= */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
+
+    /* Hero entrance */
+    .hero-center h1{
+      opacity: 0;
+      transform: translateY(18px);
+      animation: heroIn .9s cubic-bezier(.2,.9,.2,1) forwards;
+      animation-delay: .10s;
+    }
+    .hero-center .hero-sub{
+      opacity: 0;
+      transform: translateY(12px);
+      animation: heroIn .9s cubic-bezier(.2,.9,.2,1) forwards;
+      animation-delay: .22s;
+    }
+    .hero-center .cta{
+      opacity: 0;
+      transform: translateY(10px);
+      animation: heroIn .9s cubic-bezier(.2,.9,.2,1) forwards;
+      animation-delay: .34s;
+    }
+    @keyframes heroIn{
+      to{ opacity: 1; transform: translateY(0); }
+    }
+
+    /* Reveal on scroll */
+    .reveal{
+      opacity: 0;
+      transform: translateY(22px);
+      filter: blur(6px);
+      transition: opacity .75s cubic-bezier(.2,.9,.2,1),
+                  transform .75s cubic-bezier(.2,.9,.2,1),
+                  filter .75s cubic-bezier(.2,.9,.2,1);
+      will-change: transform, opacity, filter;
+    }
+    .reveal.show{
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+
+    /* Stagger children */
+    .stagger > *{
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity .65s cubic-bezier(.2,.9,.2,1),
+                  transform .65s cubic-bezier(.2,.9,.2,1);
+    }
+    .stagger.show > *{
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .stagger.show > *:nth-child(1){ transition-delay: .04s; }
+    .stagger.show > *:nth-child(2){ transition-delay: .10s; }
+    .stagger.show > *:nth-child(3){ transition-delay: .16s; }
+    .stagger.show > *:nth-child(4){ transition-delay: .22s; }
+    .stagger.show > *:nth-child(5){ transition-delay: .28s; }
+    .stagger.show > *:nth-child(6){ transition-delay: .34s; }
+
+    /* Ripple */
+    .ripple{
+      position:absolute;
+      border-radius:999px;
+      transform: scale(0);
+      opacity: .35;
+      background: white;
+      animation: ripple .55s ease-out;
+      pointer-events:none;
+    }
+    @keyframes ripple{
+      to{ transform: scale(3.2); opacity: 0; }
+    }
+
+    /* Scroll progress bar */
+    .scrollbar{
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: rgba(59,130,246,.95);
+      z-index: 999;
     }
 
     /* Responsive */
@@ -315,13 +473,17 @@
       .twoCol{grid-template-columns:1fr}
       .grid3{grid-template-columns:1fr}
       .nav-links{display:none}
-      .nav-left{font-size:12px}
+      .burger{display:inline-flex}
       .infoRow{grid-template-columns: 120px 1fr}
+      .hero{background-attachment: scroll;}
     }
   </style>
 </head>
 
 <body>
+  <!-- Scroll progress -->
+  <div class="scrollbar" id="scrollbar"></div>
+
   <!-- NAV -->
   <div class="nav">
     <div class="nav-inner">
@@ -333,10 +495,24 @@
         <a href="#projects" data-section="projects">Projets</a>
         <a href="#education" data-section="education">Formation</a>
         <a href="#experience" data-section="experience">Expérience</a>
+
         <!-- Replace with your LinkedIn -->
         <a class="linkedin" href="#" target="_blank" rel="noreferrer" aria-label="LinkedIn">in</a>
+
+        <span class="nav-indicator" id="navIndicator"></span>
       </div>
+
+      <button class="burger" id="burger" type="button">☰</button>
     </div>
+  </div>
+
+  <!-- Mobile nav -->
+  <div class="mobilePanel" id="mobilePanel">
+    <a href="#about">Qui suis-je ?</a>
+    <a href="#skills">Compétences</a>
+    <a href="#projects">Projets</a>
+    <a href="#education">Formation</a>
+    <a href="#experience">Expérience</a>
   </div>
 
   <!-- HERO -->
@@ -356,8 +532,8 @@
     </div>
   </section>
 
-  <!-- ABOUT + CONTACT (2 columns like screenshot) -->
-  <div class="section" id="about">
+  <!-- ABOUT + CONTACT -->
+  <div class="section reveal" id="about">
     <div class="card">
       <div class="twoCol">
         <div>
@@ -365,8 +541,8 @@
           <p class="p">
             Étudiant en <strong>M1 Contrôle, Audit & Conseil (ENCG Settat)</strong>, je recherche un
             <strong>stage S8 (2 mois)</strong> au sein d’un <strong>cabinet d’audit / expertise comptable</strong>,
-            disponible <strong>dès le 01/04/2025</strong>. Je suis à l’aise avec les tâches de tenue, révision,
-            préparation de dossiers, suivi de KPI et outils bureautiques.
+            disponible <strong>dès le 01/04/2025</strong>. Je peux contribuer à la tenue & révision,
+            la préparation de dossiers, les déclarations (selon missions) et le suivi d’indicateurs (Excel, Sage 1000).
           </p>
         </div>
 
@@ -397,10 +573,10 @@
     </div>
   </div>
 
-  <!-- Skills -->
+  <!-- SKILLS -->
   <div class="sectionTitleBar" id="skills">Compétences</div>
   <div class="section">
-    <div class="grid3">
+    <div class="grid3 stagger">
       <div class="mini">
         <h3>Outils</h3>
         <div class="tags">
@@ -434,21 +610,20 @@
     </div>
   </div>
 
-  <!-- Projects (for compta/audit keep it simple) -->
+  <!-- PROJECTS -->
   <div class="sectionTitleBar" id="projects">Projets</div>
-  <div class="section">
+  <div class="section reveal">
     <div class="card">
       <p class="p">
-        Ici tu peux mettre 2–3 mini “projets” qui font sérieux en cabinet :
-        <strong>tableau de bord Excel</strong>, <strong>analyse financière</strong>, <strong>mini audit de process</strong>,
-        <strong>reporting</strong>. (Je peux te les rédiger proprement si tu me dis ce que tu as fait.)
+        (Optionnel) Mets 2–3 projets “cabinet friendly” : tableau de bord Excel, reporting, analyse financière,
+        mini audit de processus. Si tu me dis ce que tu as fait, je te les rédige en mode pro.
       </p>
     </div>
   </div>
 
-  <!-- Education -->
+  <!-- EDUCATION -->
   <div class="sectionTitleBar" id="education">Formation</div>
-  <div class="section">
+  <div class="section reveal">
     <div class="card">
       <ul class="list">
         <li><strong>ENCG Settat</strong> — M1 Contrôle, Audit & Conseil</li>
@@ -456,9 +631,9 @@
     </div>
   </div>
 
-  <!-- Experience -->
+  <!-- EXPERIENCE -->
   <div class="sectionTitleBar" id="experience">Expérience</div>
-  <div class="section">
+  <div class="section reveal">
     <div class="card">
       <ul class="list">
         <li><strong>Auto Hall Settat</strong> — Assistant Cellule Gestion : saisie / factures, support gestion, suivi (selon missions).</li>
@@ -471,7 +646,7 @@
   <footer>© <span id="year"></span> Ayoub ENOUIJAI</footer>
 
   <script>
-    // ====== Avatar fallback (if avatar.jpg missing) ======
+    // ====== Avatar fallback ======
     const img = document.getElementById("avatarImg");
     const fallback = document.getElementById("avatarFallback");
     img.addEventListener("error", () => {
@@ -483,37 +658,96 @@
     function scrollToId(id){
       const el = document.getElementById(id);
       if(!el) return;
-      const y = el.getBoundingClientRect().top + window.scrollY - (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--navH')) + 12);
+      const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--navH')) || 64;
+      const y = el.getBoundingClientRect().top + window.scrollY - (navH + 12);
       window.scrollTo({ top: y, behavior: "smooth" });
     }
 
-    // Intercept anchor clicks to apply offset
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
       a.addEventListener("click", (e)=>{
         const href = a.getAttribute("href");
         if(!href || href.length < 2) return;
         const id = href.slice(1);
-        // only handle if target exists
         if(document.getElementById(id)){
           e.preventDefault();
           scrollToId(id);
+          // Close mobile menu if open
+          const mp = document.getElementById("mobilePanel");
+          if (mp.style.display === "block") mp.style.display = "none";
         }
       });
     });
 
-    // ====== Scrollspy (active menu link) ======
+    // ====== Mobile menu ======
+    const burger = document.getElementById("burger");
+    const mobilePanel = document.getElementById("mobilePanel");
+    burger.addEventListener("click", ()=>{
+      mobilePanel.style.display = (mobilePanel.style.display === "block") ? "none" : "block";
+    });
+
+    // ====== Scroll progress bar ======
+    const bar = document.getElementById("scrollbar");
+    function updateProgress(){
+      const doc = document.documentElement;
+      const scrollTop = doc.scrollTop || document.body.scrollTop;
+      const height = (doc.scrollHeight - doc.clientHeight);
+      const p = height ? (scrollTop / height) * 100 : 0;
+      bar.style.width = `${p}%`;
+    }
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    updateProgress();
+
+    // ====== Reveal on scroll + stagger ======
+    const revealTargets = document.querySelectorAll(".reveal, .stagger");
+    const io = new IntersectionObserver((entries)=>{
+      for (const e of entries){
+        if (e.isIntersecting){
+          e.target.classList.add("show");
+          io.unobserve(e.target);
+        }
+      }
+    }, { threshold: 0.18, rootMargin: "0px 0px -8% 0px" });
+    revealTargets.forEach(el => io.observe(el));
+
+    // ====== Parallax hero background (subtle) ======
+    const hero = document.querySelector(".hero");
+    let parallaxRAF = null;
+    function parallax(){
+      parallaxRAF = null;
+      if (!hero) return;
+      const y = window.scrollY || 0;
+      hero.style.backgroundPosition = `center calc(50% + ${y * 0.12}px)`;
+    }
+    window.addEventListener("scroll", ()=>{
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      if (!parallaxRAF) parallaxRAF = requestAnimationFrame(parallax);
+    }, { passive: true });
+
+    // ====== Ripple effect on buttons ======
+    function addRipple(e){
+      const el = e.currentTarget;
+      const rect = el.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const ripple = document.createElement("span");
+      ripple.className = "ripple";
+      ripple.style.width = ripple.style.height = `${size}px`;
+      ripple.style.left = `${e.clientX - rect.left - size/2}px`;
+      ripple.style.top  = `${e.clientY - rect.top  - size/2}px`;
+      el.appendChild(ripple);
+      ripple.addEventListener("animationend", ()=> ripple.remove());
+    }
+    document.querySelectorAll(".cta").forEach(b=> b.addEventListener("click", addRipple));
+
+    // ====== Scrollspy + animated nav indicator ======
     const linkEls = Array.from(document.querySelectorAll('.nav-links a[data-section]'));
     const sectionIds = linkEls.map(l => l.getAttribute("data-section"));
-    const sections = sectionIds
-      .map(id => document.getElementById(id))
-      .filter(Boolean);
+    const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
 
     function setActive(id){
       linkEls.forEach(l => l.classList.toggle("active", l.getAttribute("data-section") === id));
     }
 
     const spy = new IntersectionObserver((entries)=>{
-      // pick the most visible section
       const visible = entries
         .filter(e => e.isIntersecting)
         .sort((a,b)=> b.intersectionRatio - a.intersectionRatio)[0];
@@ -521,11 +755,36 @@
     }, { root:null, threshold:[0.25, 0.4, 0.55, 0.7] });
 
     sections.forEach(s => spy.observe(s));
-
-    // Default active
     setActive("about");
 
-    // Year
+    const navWrap = document.getElementById("navLinks");
+    const indicator = document.getElementById("navIndicator");
+
+    function moveIndicatorTo(link){
+      if(!navWrap || !indicator || !link) return;
+      const r = link.getBoundingClientRect();
+      const parent = navWrap.getBoundingClientRect();
+      indicator.style.width = `${r.width}px`;
+      indicator.style.transform = `translateX(${r.left - parent.left}px)`;
+    }
+
+    function syncIndicator(){
+      const a = document.querySelector('.nav-links a.active') || linkEls[0];
+      if(a) moveIndicatorTo(a);
+    }
+    syncIndicator();
+
+    linkEls.forEach(l=>{
+      l.addEventListener("mouseenter", ()=> moveIndicatorTo(l));
+    });
+    navWrap.addEventListener("mouseleave", syncIndicator);
+    window.addEventListener("resize", syncIndicator);
+
+    // Watch active changes
+    const obsActive = new MutationObserver(syncIndicator);
+    obsActive.observe(navWrap, { subtree:true, attributes:true, attributeFilter:["class"] });
+
+    // ====== Year ======
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
