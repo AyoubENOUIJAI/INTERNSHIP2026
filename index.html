@@ -252,14 +252,28 @@
       transition: transform .06s ease, filter .12s ease;
       position:relative;
       overflow:hidden;
+      user-select:none;
+      cursor:pointer;
     }
-    .cta.whatsapp{
-  background: #25D366; /* WhatsApp green */
-  box-shadow: 0 10px 24px rgba(37,211,102,.35);
-}
-
     .cta:hover{filter:brightness(1.05)}
     .cta:active{transform:translateY(1px)}
+
+    /* WhatsApp green */
+    .cta.whatsapp{
+      background:#25D366;
+      box-shadow: 0 10px 24px rgba(37,211,102,.35);
+    }
+
+    /* Put CTAs side-by-side */
+    .cta-row{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      align-items:center;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .cta-row .cta{ margin-top:0; }
 
     /* ===================== SECTIONS ===================== */
     .section{
@@ -376,6 +390,72 @@
       font-weight:650;
     }
 
+    /* ============ EXPERIENCE CARDS ============ */
+    .exp-grid{
+      display:grid;
+      gap:16px;
+    }
+    .exp-item{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:12px;
+      box-shadow: var(--shadow);
+      padding:20px;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .exp-item:hover{ transform: translateY(-2px); }
+
+    .exp-header{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      margin-bottom:10px;
+      flex-wrap:wrap;
+    }
+    .exp-logo{
+      width:56px;
+      height:56px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:#f8fafc;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      flex:0 0 auto;
+    }
+    .exp-logo img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+    }
+    .exp-title{
+      margin:0;
+      font-size:16px;
+      font-weight:1000;
+      color:#111827;
+    }
+    .exp-sub{
+      margin:2px 0 0 0;
+      color: var(--muted);
+      font-weight:900;
+      font-size:13px;
+    }
+    .exp-body{
+      margin-top:10px;
+      color:#374151;
+      line-height:1.8;
+      font-weight:650;
+    }
+    .exp-bullets{
+      margin:10px 0 0 0;
+      padding-left:18px;
+      line-height:1.85;
+      color:#374151;
+      font-weight:650;
+    }
+
     footer{
       padding:24px 0;
       text-align:center;
@@ -403,7 +483,7 @@
       animation: heroIn .9s cubic-bezier(.2,.9,.2,1) forwards;
       animation-delay: .22s;
     }
-    .hero-center .cta{
+    .hero-center .cta-row{
       opacity: 0;
       transform: translateY(10px);
       animation: heroIn .9s cubic-bezier(.2,.9,.2,1) forwards;
@@ -525,19 +605,23 @@
     <div class="hero-content">
       <div class="hero-center">
         <div class="avatarWrap" aria-hidden="true">
-          <img id="avatarImg" src="./AYOUBPIC.png" alt="Photo d'Ayoub" />
+          <!-- Change later: avatar.jpg -->
+          <img id="avatarImg" src="./avatar.jpg" alt="Photo" />
           <div class="avatarFallback" id="avatarFallback">AE</div>
         </div>
 
         <h1>Ayoub ENOUIJAI</h1>
-        <p class="hero-sub">M1 Contrôle audit et conseil</p>
+        <p class="hero-sub">Audit • Expertise Comptable • Contrôle</p>
 
-        <a class="cta" href="./CV_Ayoub_Enouijai.pdf" download>Télécharger le CV</a>
-        <a class="cta whatsapp"
-     href="https://wa.me/212642814137"
-     target="_blank" rel="noreferrer">
-    💬 WhatsApp
-  </a>
+        <div class="cta-row">
+          <a class="cta" href="./CV_Ayoub_Enouijai.pdf" download>Télécharger le CV</a>
+
+          <a class="cta whatsapp"
+             href="https://wa.me/212642814137"
+             target="_blank" rel="noreferrer">
+            💬 WhatsApp
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -551,8 +635,10 @@
           <p class="p">
             Étudiant en <strong>M1 Contrôle, Audit & Conseil (ENCG Settat)</strong>, je recherche un
             <strong>stage S8 (2 mois)</strong> au sein d’un <strong>cabinet d’audit / expertise comptable</strong>,
-            disponible <strong>dès le 01/04/2025</strong>. Je peux contribuer à la tenue & révision,
-            la préparation de dossiers, les déclarations (selon missions) et le suivi d’indicateurs (Excel, Sage 1000).
+            disponible <strong>dès le 01/04/2025</strong>.
+            <br><br>
+            Je peux contribuer à la tenue & révision, la préparation de dossiers, les déclarations (selon missions),
+            et le suivi d’indicateurs (Excel, Sage 1000).
           </p>
         </div>
 
@@ -591,7 +677,7 @@
         <h3>Outils</h3>
         <div class="tags">
           <span class="tag">Excel (TCD, formules)</span>
-          <span class="tag">Sage 1000</span>
+          <span class="tag">Sage</span>
           <span class="tag">Word</span>
           <span class="tag">PowerPoint</span>
           <span class="tag">SPSS</span>
@@ -604,15 +690,15 @@
           <li>Tenue & saisie comptable</li>
           <li>Préparation / organisation de dossiers</li>
           <li>Rapprochements simples</li>
-          <li>Suivi trésorerie & recouvrement (selon missions)</li>
+          <li>Suivi trésorerie & recouvrement</li>
         </ul>
       </div>
 
       <div class="mini">
         <h3>Langues</h3>
         <div class="tags">
-          <span class="tag">Français (B2)</span>
-          <span class="tag">Anglais (C1)</span>
+          <span class="tag">Français</span>
+          <span class="tag">Anglais</span>
           <span class="tag">Arabe</span>
           <span class="tag">Espagnol</span>
         </div>
@@ -625,8 +711,8 @@
   <div class="section reveal">
     <div class="card">
       <p class="p">
-        (Optionnel) Mets 2–3 projets “cabinet friendly” : tableau de bord Excel, reporting, analyse financière,
-        mini audit de processus. Si tu me dis ce que tu as fait, je te les rédige en mode pro.
+        (Optionnel) Ajoute 2–3 projets “cabinet-friendly” :
+        tableau de bord Excel, reporting, analyse financière, mini audit de processus.
       </p>
     </div>
   </div>
@@ -637,6 +723,7 @@
     <div class="card">
       <ul class="list">
         <li><strong>ENCG Settat</strong> — M1 Contrôle, Audit & Conseil</li>
+        <li>(Ajoute ici ton parcours complet si tu veux)</li>
       </ul>
     </div>
   </div>
@@ -644,12 +731,78 @@
   <!-- EXPERIENCE -->
   <div class="sectionTitleBar" id="experience">Expérience</div>
   <div class="section reveal">
-    <div class="card">
-      <ul class="list">
-        <li><strong>Auto Hall Settat</strong> — Assistant Cellule Gestion : saisie / factures, support gestion, suivi (selon missions).</li>
-        <li><strong>Fiduciaire El Wafaa</strong> — Assistant comptable : préparation dossiers, CNSS / déclarations (selon missions).</li>
-        <li><strong>KITEA</strong> — Stage : collaboration produit / optimisation boutique en ligne.</li>
-      </ul>
+    <div class="exp-grid">
+
+      <!-- Experience 1 -->
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-logo">
+            <!-- Change later: logo-autohall.png -->
+            <img src="./logo-autohall.png" alt="Logo Auto Hall" onerror="this.style.display='none'">
+          </div>
+          <div>
+            <h3 class="exp-title">Auto Hall — Assistant Cellule Gestion</h3>
+            <p class="exp-sub">Stage • Dates (à remplir) • Settat</p>
+          </div>
+        </div>
+
+        <div class="exp-body">
+          <strong>Détails des missions :</strong>
+          <ul class="exp-bullets">
+            <li>À remplir : ce que tu faisais au quotidien (tenue, saisie, contrôle, etc.).</li>
+            <li>À remplir : outils utilisés (Sage / Excel / autres).</li>
+            <li>À remplir : livrables (reporting, tableaux, dossiers…).</li>
+            <li>À remplir : résultats / impact (ex: fiabilisation, gain de temps).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Experience 2 -->
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-logo">
+            <!-- Change later: logo-elwafaa.png -->
+            <img src="./logo-elwafaa.png" alt="Logo Fiduciaire El Wafaa" onerror="this.style.display='none'">
+          </div>
+          <div>
+            <h3 class="exp-title">Fiduciaire El Wafaa — Assistant comptable</h3>
+            <p class="exp-sub">Stage • Dates (à remplir) • Ville (à remplir)</p>
+          </div>
+        </div>
+
+        <div class="exp-body">
+          <strong>Détails des missions :</strong>
+          <ul class="exp-bullets">
+            <li>À remplir : préparation des dossiers + classement / tri des pièces.</li>
+            <li>À remplir : saisie / révision (si applicable).</li>
+            <li>À remplir : déclarations / plateformes (si applicable).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Experience 3 -->
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-logo">
+            <!-- Change later: logo-kitea.png -->
+            <img src="./logo-kitea.png" alt="Logo KITEA" onerror="this.style.display='none'">
+          </div>
+          <div>
+            <h3 class="exp-title">KITEA — Stage (Chef de produit)</h3>
+            <p class="exp-sub">Stage • Dates (à remplir) • Ville (à remplir)</p>
+          </div>
+        </div>
+
+        <div class="exp-body">
+          <strong>Détails des missions :</strong>
+          <ul class="exp-bullets">
+            <li>À remplir : projet / responsabilité principale.</li>
+            <li>À remplir : coordination avec équipes / outils.</li>
+            <li>À remplir : résultat mesurable (si possible).</li>
+          </ul>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -681,7 +834,6 @@
         if(document.getElementById(id)){
           e.preventDefault();
           scrollToId(id);
-          // Close mobile menu if open
           const mp = document.getElementById("mobilePanel");
           if (mp.style.display === "block") mp.style.display = "none";
         }
@@ -790,7 +942,6 @@
     navWrap.addEventListener("mouseleave", syncIndicator);
     window.addEventListener("resize", syncIndicator);
 
-    // Watch active changes
     const obsActive = new MutationObserver(syncIndicator);
     obsActive.observe(navWrap, { subtree:true, attributes:true, attributeFilter:["class"] });
 
