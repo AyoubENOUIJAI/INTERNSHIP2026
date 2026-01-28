@@ -970,5 +970,27 @@
     // Year
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
+  <script>
+  // Track CV download
+  document.querySelectorAll('a[href$=".pdf"]').forEach(link => {
+    link.addEventListener('click', () => {
+      gtag('event', 'cv_download', {
+        event_category: 'engagement',
+        event_label: 'CV Ayoub ENOUIJAI'
+      });
+    });
+  });
+
+  // Track WhatsApp click
+  document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+    link.addEventListener('click', () => {
+      gtag('event', 'whatsapp_click', {
+        event_category: 'engagement',
+        event_label: 'WhatsApp Contact'
+      });
+    });
+  });
+</script>
+
 </body>
 </html>
