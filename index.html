@@ -3,20 +3,23 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ayoub ENOUIJAI — Stage Audit / Expertise Comptable</title>
-  <meta name="description" content="M1 Contrôle, Audit & Conseil (ENCG Settat) — Recherche stage S8 (2 mois) dès le 01/04/2025." />
+  <title>Ayoub ENOUIJAI — Audit / Expertise Comptable</title>
+  <meta name="description" content="M1 Contrôle, Audit & Conseil (ENCG Settat) — Stage S8 (2 mois) dès 01/04/2025." />
 
   <style>
     :root{
-      --bg: #0b1220;
-      --card: rgba(255,255,255,.92);
-      --stroke: rgba(226,232,240,.8);
-      --text: #0f172a;
-      --muted: #475569;
-      --brand: #2563eb;
-      --brand2:#16a34a;
-      --radius: 18px;
-      --shadow: 0 24px 70px rgba(2,6,23,.35);
+      --bg:#0b1220;
+      --overlay: rgba(17, 24, 39, .62);
+      --white:#ffffff;
+      --soft:#f7f7f7;
+      --text:#111827;
+      --muted:#6b7280;
+      --blue:#1d4ed8;
+      --blue2:#2563eb;
+      --border:#e5e7eb;
+      --shadow: 0 18px 50px rgba(0,0,0,.12);
+      --max: 1100px;
+      --navH: 64px;
       --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
     }
 
@@ -26,375 +29,503 @@
       margin:0;
       font-family:var(--font);
       color:var(--text);
-      background:
-        linear-gradient(180deg, rgba(2,6,23,.72), rgba(2,6,23,.72)),
-        url("./encg-settat-campus.jpg") center/cover no-repeat fixed;
+      background: var(--soft);
+    }
+
+    /* ===================== HERO ===================== */
+    .hero{
+      position:relative;
       min-height:100vh;
+      background: url("./encg-settat-campus.jpg") center/cover no-repeat;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: var(--overlay);
     }
 
     /* Top nav */
-    header{
-      position:sticky;
-      top:0;
-      z-index:50;
-      backdrop-filter: blur(10px);
-      background: rgba(2,6,23,.55);
-      border-bottom: 1px solid rgba(148,163,184,.18);
-    }
     .nav{
-      width:min(1100px, 92%);
+      position:fixed;
+      top:0; left:0; right:0;
+      height: var(--navH);
+      z-index:50;
+      display:flex;
+      align-items:center;
+      background: rgba(0,0,0,.12);
+      backdrop-filter: blur(6px);
+    }
+    .nav-inner{
+      width:min(var(--max), 92%);
       margin:0 auto;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:14px;
-      padding:12px 0;
-      color: rgba(241,245,249,.92);
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight:900;
-      letter-spacing:.02em;
-    }
-    .pill{
-      width:38px; height:38px; border-radius:12px;
-      display:flex; align-items:center; justify-content:center;
-      background: linear-gradient(135deg,#93c5fd,#86efac);
-      color:#0b1220;
-      font-weight:1000;
-    }
-    nav a{
-      color: rgba(241,245,249,.92);
-      text-decoration:none;
-      font-weight:800;
-      font-size:13px;
-      padding:8px 10px;
-      border-radius:12px;
-      border:1px solid transparent;
-    }
-    nav a:hover{
-      border-color: rgba(148,163,184,.22);
-      background: rgba(15,23,42,.25);
-    }
-
-    /* Layout */
-    .container{
-      width:min(1100px, 92%);
-      margin:0 auto;
-      padding:26px 0 60px;
-    }
-
-    /* Hero */
-    .hero{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
       gap:16px;
-      align-items:stretch;
-      margin-top:18px;
+      color: rgba(255,255,255,.92);
     }
-    .card{
-      background:var(--card);
-      border:1px solid var(--stroke);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:22px;
-      backdrop-filter: blur(8px);
+    .nav-left{
+      font-weight:800;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      font-size:14px;
     }
-    .hero-left h1{
-      margin:0;
-      font-size:44px;
-      letter-spacing:-.03em;
-      line-height:1.05;
+    .nav-links{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
     }
-    .hero-left .title{
-      margin-top:10px;
-      font-weight:900;
-      color: var(--muted);
+    .nav-links a{
+      color: rgba(255,255,255,.88);
+      text-decoration:none;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      font-weight:800;
+      font-size:12px;
+      padding:8px 6px;
+      border-bottom: 2px solid transparent;
+      transition: .15s ease;
     }
-    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px}
-    .chip{
-      background: rgba(241,245,249,.8);
-      border: 1px solid rgba(148,163,184,.35);
-      padding:8px 12px;
-      border-radius:999px;
-      font-weight:900;
-      font-size:13px;
+    .nav-links a:hover{
+      color:#fff;
+      border-bottom-color: rgba(255,255,255,.35);
     }
-    .pitch{
-      margin-top:14px;
-      color:#111827;
-      line-height:1.7;
-      font-weight:600;
-      max-width: 78ch;
+    .nav-links a.active{
+      color:#fff;
+      border-bottom-color: rgba(59,130,246,.95);
     }
-    .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
-    .btn{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:12px 14px;
-      border-radius:14px;
+
+    .linkedin{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:28px;height:28px;
+      border-radius:6px;
+      background: rgba(37,99,235,.95);
+      color:white;
       font-weight:1000;
       text-decoration:none;
-      border:1px solid transparent;
-      cursor:pointer;
+      margin-left:4px;
+    }
+
+    /* Hero content */
+    .hero-content{
+      position:relative;
+      z-index:2;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding-top: var(--navH);
+      padding-bottom: 40px;
+      text-align:center;
+    }
+
+    .hero-center{
+      width:min(var(--max), 92%);
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:14px;
+      color:white;
+    }
+
+    .avatarWrap{
+      width:140px;height:140px;
+      border-radius:999px;
+      border: 6px solid rgba(255,255,255,.35);
+      box-shadow: 0 16px 40px rgba(0,0,0,.25);
+      overflow:hidden;
+      background: rgba(255,255,255,.10);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .avatarWrap img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .avatarFallback{
+      font-weight:1000;
+      font-size:44px;
+      letter-spacing:.02em;
+      color: rgba(255,255,255,.92);
+      display:none;
       user-select:none;
     }
-    .btn.primary{background:var(--brand); color:white;}
-    .btn.green{background:var(--brand2); color:white;}
-    .btn.ghost{background:white; border-color:var(--stroke); color:var(--text);}
-    .btn:active{transform:translateY(1px)}
 
-    /* Contact panel */
-    .contact-grid{display:grid; gap:10px}
-    .contact-item{
-      display:flex; gap:12px; align-items:center;
-      padding:12px;
-      border-radius:16px;
-      border:1px solid rgba(226,232,240,.9);
-      background: rgba(248,250,252,.9);
-      overflow:hidden;
+    h1{
+      margin:0;
+      font-size:52px;
+      line-height:1.05;
+      letter-spacing:-.02em;
+      text-shadow: 0 10px 30px rgba(0,0,0,.25);
     }
-    .icon{
-      width:42px; height:42px; border-radius:14px;
-      display:flex; align-items:center; justify-content:center;
-      background: rgba(219,234,254,.85);
-      border:1px solid rgba(147,197,253,.65);
-      flex:0 0 auto;
-      font-size:18px;
+    .hero-sub{
+      margin:0;
+      font-weight:900;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+      font-size:14px;
+      color: rgba(255,255,255,.86);
     }
-    .contact-item a, .contact-item span{
+
+    .cta{
+      margin-top:10px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 18px;
+      border-radius:6px;
+      background: var(--blue2);
+      color:white;
       text-decoration:none;
-      color: var(--text);
-      font-weight:1000;
-      white-space:nowrap;
+      font-weight:900;
+      box-shadow: 0 10px 24px rgba(37,99,235,.35);
+      transition: transform .06s ease, filter .12s ease;
+    }
+    .cta:hover{filter:brightness(1.05)}
+    .cta:active{transform:translateY(1px)}
+
+    /* ===================== SECTIONS ===================== */
+    .section{
+      width:min(var(--max), 92%);
+      margin: 0 auto;
+      padding: 56px 0;
+    }
+    .card{
+      background:white;
+      border:1px solid var(--border);
+      border-radius:10px;
+      box-shadow: var(--shadow);
+      padding:34px;
+    }
+
+    .twoCol{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:30px;
+    }
+    .h2{
+      margin:0 0 14px 0;
+      font-size:30px;
+      letter-spacing:-.01em;
+    }
+    .p{
+      margin:0;
+      color:#374151;
+      line-height:1.8;
+      font-size:16px;
+    }
+
+    .infoRow{
+      display:grid;
+      grid-template-columns: 140px 1fr;
+      gap:14px;
+      padding:12px 0;
+      border-bottom:1px solid #f1f5f9;
+      align-items:center;
+    }
+    .infoRow:last-child{border-bottom:none}
+    .label{
+      font-weight:900;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      color:#111827;
+      font-size:12px;
+    }
+    .value{
+      font-weight:700;
+      color:#111827;
       overflow:hidden;
       text-overflow:ellipsis;
+      white-space:nowrap;
     }
-    .contact-item small{display:block; margin-top:2px; color:var(--muted); font-weight:800}
+    .value a{color:#111827; text-decoration:none}
+    .value a:hover{text-decoration:underline}
 
-    /* Sections */
-    section{margin-top:16px}
-    .section-title{
-      margin:0 0 10px 0;
-      color: rgba(241,245,249,.95);
+    /* Simple section titles like the site */
+    .sectionTitleBar{
+      width:min(var(--max), 92%);
+      margin: 0 auto;
+      padding-top: 56px;
+      padding-bottom: 14px;
       font-weight:1000;
-      letter-spacing:.02em;
-      text-shadow: 0 2px 18px rgba(0,0,0,.35);
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:#0f172a;
+      font-size:12px;
     }
-    .grid-2{
+
+    .grid3{
       display:grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap:16px;
     }
-    .list{margin:0; padding-left:18px; color:#111827; line-height:1.8; font-weight:650}
-    .muted{color:var(--muted); font-weight:800}
-    .tagrow{display:flex; flex-wrap:wrap; gap:8px}
+    .mini{
+      background:white;
+      border:1px solid var(--border);
+      border-radius:10px;
+      box-shadow: var(--shadow);
+      padding:18px;
+    }
+    .mini h3{
+      margin:0 0 10px 0;
+      font-size:16px;
+      letter-spacing:-.01em;
+    }
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
     .tag{
       padding:8px 10px;
       border-radius:999px;
-      background: rgba(241,245,249,.85);
-      border: 1px solid rgba(148,163,184,.35);
-      font-weight:950;
+      border:1px solid #e5e7eb;
+      background:#f8fafc;
+      font-weight:800;
       font-size:13px;
+      color:#0f172a;
+    }
+    .list{
+      margin:0;
+      padding-left:18px;
+      line-height:1.85;
+      color:#374151;
+      font-weight:650;
     }
 
     footer{
-      width:min(1100px, 92%);
-      margin: 28px auto 34px;
-      color: rgba(241,245,249,.85);
-      font-weight:800;
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      text-shadow: 0 2px 16px rgba(0,0,0,.35);
+      padding:24px 0;
+      text-align:center;
+      color:#6b7280;
+      font-weight:700;
     }
 
+    /* Responsive */
     @media (max-width: 900px){
-      .hero{grid-template-columns:1fr}
-      .hero-left h1{font-size:34px}
-      body{background-attachment: scroll;}
-      .grid-2{grid-template-columns:1fr}
-      nav{display:none;}
+      h1{font-size:38px}
+      .twoCol{grid-template-columns:1fr}
+      .grid3{grid-template-columns:1fr}
+      .nav-links{display:none}
+      .nav-left{font-size:12px}
+      .infoRow{grid-template-columns: 120px 1fr}
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="nav">
-      <div class="brand">
-        <div class="pill">AE</div>
-        <div>Ayoub ENOUIJAI</div>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="nav-left">Bonjour !</div>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#about" data-section="about">Qui suis-je ?</a>
+        <a href="#skills" data-section="skills">Compétences</a>
+        <a href="#projects" data-section="projects">Projets</a>
+        <a href="#education" data-section="education">Formation</a>
+        <a href="#experience" data-section="experience">Expérience</a>
+        <!-- Replace with your LinkedIn -->
+        <a class="linkedin" href="#" target="_blank" rel="noreferrer" aria-label="LinkedIn">in</a>
       </div>
-
-      <nav>
-        <a href="#about">Qui suis-je ?</a>
-        <a href="#skills">Compétences</a>
-        <a href="#education">Formation</a>
-        <a href="#experience">Expérience</a>
-        <a href="#contact">Contact</a>
-      </nav>
-
-      <a class="btn primary" href="./CV_Ayoub_Enouijai.pdf" download>⬇️ Télécharger le CV</a>
     </div>
-  </header>
+  </div>
 
-  <main class="container">
-    <div class="hero">
-      <!-- LEFT: hero text -->
-      <div class="card hero-left">
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="hero-center">
+        <div class="avatarWrap" aria-hidden="true">
+          <img id="avatarImg" src="./avatar.jpg" alt="Photo d'Ayoub" />
+          <div class="avatarFallback" id="avatarFallback">AE</div>
+        </div>
+
         <h1>Ayoub ENOUIJAI</h1>
-        <div class="title">M1 Contrôle, Audit & Conseil — ENCG Settat</div>
+        <p class="hero-sub">Audit • Expertise Comptable • Contrôle</p>
 
-        <div class="chips">
-          <div class="chip">🎯 Stage S8 • 2 mois</div>
-          <div class="chip">📅 Dès 01/04/2025</div>
-          <div class="chip">📍 Settat • Maroc</div>
-        </div>
-
-        <p class="pitch" id="about">
-          Étudiant en <strong>Contrôle, Audit & Conseil</strong>, je recherche un <strong>stage S8</strong>
-          au sein d’un <strong>cabinet d’audit / expertise comptable</strong>. Je peux contribuer à la
-          <strong>tenue & révision</strong>, la préparation de dossiers, les <strong>déclarations</strong> et le
-          suivi d’indicateurs (Excel, Sage 1000).
-        </p>
-
-        <div class="actions">
-          <a class="btn primary" href="./CV_Ayoub_Enouijai.pdf" download>⬇️ Télécharger le CV</a>
-          <a class="btn green" href="mailto:enouijaiayoub@gmail.com?subject=Stage%20S8%20Audit%20%2F%20Expertise%20Comptable&body=Bonjour%2C%0A%0AJe%20vous%20contacte%20pour%20un%20stage%20S8%20(2%20mois)%20d%C3%A8s%20le%2001%2F04%2F2025.%0A%0ABien%20cordialement%2C%0AAyoub%20ENOUIJAI">✉️ Me contacter</a>
-          <a class="btn ghost" href="#experience">👇 Voir l’expérience</a>
-        </div>
+        <a class="cta" href="./CV_Ayoub_Enouijai.pdf" download>Télécharger le CV</a>
       </div>
-
-      <!-- RIGHT: contact box -->
-      <aside class="card" id="contact">
-        <h2 style="margin:0 0 12px 0; font-size:16px;">Informations / Contact</h2>
-
-        <div class="contact-grid">
-          <div class="contact-item">
-            <div class="icon">✉️</div>
-            <div style="min-width:0">
-              <a href="mailto:enouijaiayoub@gmail.com">enouijaiayoub@gmail.com</a>
-              <small>Email</small>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="icon">📞</div>
-            <div style="min-width:0">
-              <a href="tel:+212642814137">+212 6 42 81 41 37</a>
-              <small>Téléphone</small>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="icon">📍</div>
-            <div style="min-width:0">
-              <span>Settat, Maroc</span>
-              <small>Localisation</small>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="icon">🔗</div>
-            <div style="min-width:0">
-              <a href="#" target="_blank" rel="noreferrer">LinkedIn (à ajouter)</a>
-              <small>Profil</small>
-            </div>
-          </div>
-        </div>
-
-        <p style="margin:12px 0 0 0; color:#111827; line-height:1.65; font-weight:650;">
-          Disponible dès <strong>01/04/2025</strong> (2 mois). Objectif : cabinet d’audit / expertise comptable.
-        </p>
-      </aside>
     </div>
+  </section>
 
-    <!-- Sections (like the site you showed: skills, education, experience) -->
-    <section id="skills">
-      <h2 class="section-title">Compétences</h2>
-      <div class="grid-2">
-        <div class="card">
-          <h3 style="margin:0 0 10px 0; font-size:15px;">Outils</h3>
-          <div class="tagrow">
-            <span class="tag">Excel (TCD, formules)</span>
-            <span class="tag">Sage 1000</span>
-            <span class="tag">Word</span>
-            <span class="tag">PowerPoint</span>
-            <span class="tag">SPSS</span>
-          </div>
-          <p class="muted" style="margin:12px 0 0 0;">(d’après ton CV)</p>
+  <!-- ABOUT + CONTACT (2 columns like screenshot) -->
+  <div class="section" id="about">
+    <div class="card">
+      <div class="twoCol">
+        <div>
+          <h2 class="h2">Qui suis-je ?</h2>
+          <p class="p">
+            Étudiant en <strong>M1 Contrôle, Audit & Conseil (ENCG Settat)</strong>, je recherche un
+            <strong>stage S8 (2 mois)</strong> au sein d’un <strong>cabinet d’audit / expertise comptable</strong>,
+            disponible <strong>dès le 01/04/2025</strong>. Je suis à l’aise avec les tâches de tenue, révision,
+            préparation de dossiers, suivi de KPI et outils bureautiques.
+          </p>
         </div>
 
-        <div class="card">
-          <h3 style="margin:0 0 10px 0; font-size:15px;">Profil cabinet</h3>
-          <ul class="list">
-            <li>Tenue & saisie comptable</li>
-            <li>Préparation / organisation de dossiers</li>
-            <li>Rapprochements simples & suivi trésorerie</li>
-            <li>Déclarations (TVA/IS/CNSS) — selon missions</li>
-          </ul>
+        <div>
+          <h2 class="h2">Informations / Contact</h2>
+
+          <div class="infoRow">
+            <div class="label">Email:</div>
+            <div class="value"><a href="mailto:enouijaiayoub@gmail.com">enouijaiayoub@gmail.com</a></div>
+          </div>
+
+          <div class="infoRow">
+            <div class="label">Téléphone:</div>
+            <div class="value"><a href="tel:+212642814137">+212 6 42 81 41 37</a></div>
+          </div>
+
+          <div class="infoRow">
+            <div class="label">Localisation:</div>
+            <div class="value">Settat, Maroc</div>
+          </div>
+
+          <div class="infoRow">
+            <div class="label">Disponibilité:</div>
+            <div class="value">01/04/2025 • 2 mois</div>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <section id="education">
-      <h2 class="section-title">Formation</h2>
-      <div class="card">
+  <!-- Skills -->
+  <div class="sectionTitleBar" id="skills">Compétences</div>
+  <div class="section">
+    <div class="grid3">
+      <div class="mini">
+        <h3>Outils</h3>
+        <div class="tags">
+          <span class="tag">Excel (TCD, formules)</span>
+          <span class="tag">Sage 1000</span>
+          <span class="tag">Word</span>
+          <span class="tag">PowerPoint</span>
+          <span class="tag">SPSS</span>
+        </div>
+      </div>
+
+      <div class="mini">
+        <h3>Cabinet</h3>
         <ul class="list">
-          <li><strong>ENCG Settat</strong> — <strong>M1 Contrôle, Audit & Conseil</strong> <span class="muted">(selon CV)</span></li>
+          <li>Tenue & saisie comptable</li>
+          <li>Préparation / organisation de dossiers</li>
+          <li>Rapprochements simples</li>
+          <li>Suivi trésorerie & recouvrement (selon missions)</li>
         </ul>
       </div>
-    </section>
 
-    <section id="experience">
-      <h2 class="section-title">Expérience</h2>
-      <div class="grid-2">
-        <div class="card">
-          <h3 style="margin:0 0 10px 0; font-size:15px;">Auto Hall Settat — Assistant Cellule Gestion</h3>
-          <ul class="list">
-            <li>Saisie factures / comptabilité & analytique sur Sage 1000</li>
-            <li>Suivi trésorerie, recouvrement, tâches support gestion</li>
-          </ul>
-          <p class="muted" style="margin:10px 0 0 0;">(résumé basé sur ton CV)</p>
-        </div>
-
-        <div class="card">
-          <h3 style="margin:0 0 10px 0; font-size:15px;">Fiduciaire El Wafaa — Assistant comptable</h3>
-          <ul class="list">
-            <li>Tri de pièces, préparation dossiers</li>
-            <li>CNSS (damancom), déclarations (tax.gov.ma)</li>
-          </ul>
-          <p class="muted" style="margin:10px 0 0 0;">(résumé basé sur ton CV)</p>
-        </div>
-
-        <div class="card">
-          <h3 style="margin:0 0 10px 0; font-size:15px;">KITEA — Chef de produit (stage)</h3>
-          <ul class="list">
-            <li>Collaboration achats/produit, optimisation boutique en ligne</li>
-          </ul>
-          <p class="muted" style="margin:10px 0 0 0;">(selon CV)</p>
-        </div>
-
-        <div class="card">
-          <h3 style="margin:0 0 10px 0; font-size:15px;">Langues</h3>
-          <div class="tagrow">
-            <span class="tag">FR (B2)</span>
-            <span class="tag">EN (C1)</span>
-            <span class="tag">AR</span>
-            <span class="tag">ES</span>
-          </div>
+      <div class="mini">
+        <h3>Langues</h3>
+        <div class="tags">
+          <span class="tag">Français (B2)</span>
+          <span class="tag">Anglais (C1)</span>
+          <span class="tag">Arabe</span>
+          <span class="tag">Espagnol</span>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </div>
 
-  <footer>
-    <span>© <span id="year"></span> Ayoub ENOUIJAI</span>
-    <span>Stage S8 dès 01/04/2025 • Audit / Expertise Comptable</span>
-  </footer>
+  <!-- Projects (for compta/audit keep it simple) -->
+  <div class="sectionTitleBar" id="projects">Projets</div>
+  <div class="section">
+    <div class="card">
+      <p class="p">
+        Ici tu peux mettre 2–3 mini “projets” qui font sérieux en cabinet :
+        <strong>tableau de bord Excel</strong>, <strong>analyse financière</strong>, <strong>mini audit de process</strong>,
+        <strong>reporting</strong>. (Je peux te les rédiger proprement si tu me dis ce que tu as fait.)
+      </p>
+    </div>
+  </div>
+
+  <!-- Education -->
+  <div class="sectionTitleBar" id="education">Formation</div>
+  <div class="section">
+    <div class="card">
+      <ul class="list">
+        <li><strong>ENCG Settat</strong> — M1 Contrôle, Audit & Conseil</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Experience -->
+  <div class="sectionTitleBar" id="experience">Expérience</div>
+  <div class="section">
+    <div class="card">
+      <ul class="list">
+        <li><strong>Auto Hall Settat</strong> — Assistant Cellule Gestion : saisie / factures, support gestion, suivi (selon missions).</li>
+        <li><strong>Fiduciaire El Wafaa</strong> — Assistant comptable : préparation dossiers, CNSS / déclarations (selon missions).</li>
+        <li><strong>KITEA</strong> — Stage : collaboration produit / optimisation boutique en ligne.</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>© <span id="year"></span> Ayoub ENOUIJAI</footer>
 
   <script>
+    // ====== Avatar fallback (if avatar.jpg missing) ======
+    const img = document.getElementById("avatarImg");
+    const fallback = document.getElementById("avatarFallback");
+    img.addEventListener("error", () => {
+      img.style.display = "none";
+      fallback.style.display = "flex";
+    });
+
+    // ====== Smooth scroll offset (fixed nav) ======
+    function scrollToId(id){
+      const el = document.getElementById(id);
+      if(!el) return;
+      const y = el.getBoundingClientRect().top + window.scrollY - (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--navH')) + 12);
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+
+    // Intercept anchor clicks to apply offset
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener("click", (e)=>{
+        const href = a.getAttribute("href");
+        if(!href || href.length < 2) return;
+        const id = href.slice(1);
+        // only handle if target exists
+        if(document.getElementById(id)){
+          e.preventDefault();
+          scrollToId(id);
+        }
+      });
+    });
+
+    // ====== Scrollspy (active menu link) ======
+    const linkEls = Array.from(document.querySelectorAll('.nav-links a[data-section]'));
+    const sectionIds = linkEls.map(l => l.getAttribute("data-section"));
+    const sections = sectionIds
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+
+    function setActive(id){
+      linkEls.forEach(l => l.classList.toggle("active", l.getAttribute("data-section") === id));
+    }
+
+    const spy = new IntersectionObserver((entries)=>{
+      // pick the most visible section
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a,b)=> b.intersectionRatio - a.intersectionRatio)[0];
+      if(visible) setActive(visible.target.id);
+    }, { root:null, threshold:[0.25, 0.4, 0.55, 0.7] });
+
+    sections.forEach(s => spy.observe(s));
+
+    // Default active
+    setActive("about");
+
+    // Year
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
